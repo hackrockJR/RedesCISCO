@@ -1,0 +1,342 @@
+> Lab F
+
+R1(config-if)# ip address 192.168.1.1 255.255.255.0
+R1(config-if)# ip address 192.168.1.2 255.255.255.0
+
+Este diseño de red no es aceptado por el router como un esquema de direcionamiento.
+
+> LAB 2
+
+Host A: 10.1.0.36
+Host B: 10.1.1.70
+
+Si se une por un dispositivo intermediario cuales son los resultados de las siguientes mascaras de subred:
+
+- Mascara de subred amplia: 255.255.255.128 el dispositivo requiere una direccion IP en unica subred. 
+- Mascara 255.255.255.0: se debe usar un dispositivo de capa 3 para comunicar los ordendores. 
+- Mascara 255.255.254.0: cada interfaz no requiere una direccion IP del dispositivo.
+
+> LAB 3
+
+Identificar afirmaciones de la interfaz de un switch con el comando show Mac-address table:
+
+- Se logra identificar 7 Mac-address , asociado a la misma interfaz , por lo tanto la interfaz esta configurado en modo trunk permitiendo distintas VLANs.
+- El resultado del comando show cdp neighbors no muestra una interfaz , sin embargo corresponde a dos direcciones MAC de la misma VLAN por lo tanto es un Hub.
+
+> LAB 4
+
+Router> enable 
+Router# configure terminal
+Router(config)# hostname Weaver
+Weaver(config)#ip nat pool mypool 198.18.184.105 198.18.184.110 netmask 255.255.255.248 // pool NAT
+Weaver(config)# access-list 1 permit 192.168.100.16 0.0.0.15 
+Weaver(config)#ip nat inside source list 1 pool mypool overload // access-list host locales sumarizado ; // overload permite muchos a uno. 
+Weaver(config)#interface fa 0/0 
+Weaver(config-if)# ip nat inside
+Weaver(config-if)# exit
+Weaver(config)#interface s0/0 
+Weaver(config-if)# ip nat outside
+Weaver(config)#end
+weaver# copy running-config startup-config
+
+c:\> ping 192.0.2.114
+
+
+
+> LAB 5
+
+- Al ejecutar la siguiente serie de comandos:
+
+router ospf 1 
+network 192.168.16.0 0.0.0.255 area 0
+permite agregar la red 192.168.16.0 en la area 0 OSPF 
+
+> LAB 6
+
+Routers:
+
+Para conocer la mejor ruta entre router se recomienda usar los comandos:
+
+show ip interface brief
+show ip route 
+
+
+> LAB 7
+
+Interfaz (Manchester) A_R1: 10.1.1.1 ; (London) Interfaz A_R2: 10.1.1.2/30
+
+Resultado del comando show cdp entry en router Manchester
+
+Device ID: London 
+Ip address: 10.1.1.2
+Plataform: CISCO 2610
+Interface: Serial 0/0 
+
+ 
+
+> LAB 8 
+
+Resultado del comando: show ip interface brief el ID del router no se ha establecido de forma manual usara la direccion mas alta de loopback sera el ID OSPF
+
+> LAB 9 Subneting
+
+Requerimientos: 
+
+Segun la direccion de red 172.1.4.0 que tipo de mascara de sub red utilizaria para realizar cada 4 saltos cambios de red o 1022 host utiles = 
+
+ 172.1.4.0 / ?
+ 
+  2 a la 2 = 4
+ 
+ 256 128 64 32 16 8 >4< 2
+
+ 
+  00000010 > 4 Saltos
+  
+  00000011> prestamos dos bits para red> decimal 3 
+  
+  mascara > 255-3 = 252
+  
+  11111111.11111111.11111100.00000000
+  
+  255.255.252.0 
+ 
+ id mascara = 8+8+6 = /22
+ 
+ Cantidad de host = 
+ 
+ 00000011.11111111
+ 
+ 8 bits= 256
+ 9 bits= 512
+ 10 bits 1024 (bits de host) -2 (direccion de red y broadcast) = 1022
+
+ 
+
+> LAB 10
+
+10.0.0.0 / 22
+ 
+  2 a la 2 = 4
+ 
+ 256 128 64 32 16 8 >4< 2
+
+ 
+  00000010 > 4 Saltos
+  
+  00000011> prestamos dos bits para red> decimal 3 
+  
+  mascara > 255-3 = 252
+  
+  11111111.11111111.11111100.00000000
+  
+  255.255.252.0 
+ 
+ id mascara = 8+8+6 = /22
+ 
+ Cantidad de host = 
+ 
+ 00000011.11111111
+ 
+ 8 bits= 256
+ 9 bits= 512
+ 10 bits 1024 (bits de host) -2 (direccion de red y broadcast) = 1022
+
+> LAB 11
+
+ Cuantos host son utilies en esta subred para host?
+172.16.0.0/16
+
+/16 
+
+
+11111111.11111111.00000000.00000000
+
+255.255.0.0
+
+2^16=
+
+8 = 256 , 512 , 1024, 11 2048,12 4096, 13  8192, 14  16384, 15 32768 , 16 65536 -2 = 65534
+
+> LAB 12
+
+Requerimiento => Mascara de subred que contenga ocho subredes en clase C
+
+2^ 3 = 8
+
+Los bits activos (1) para subred se cuentan de izquierda a direcha del octecto con la que se trabaja:
+
+255.255.255.11100000
+
+/27
+
+256 128 62 |_32 16 8 2 1
+
+256-32= 224
+
+255.255.255.224
+
+192.168.1.0/27 
+
+192.168.1.0 255.255.255.224 > Clase C
+
+
+> LAB 13
+
+VLSM ( Mascara de subred de longitud varible) 
+
+10.188.31.0/23 
+  
+Requerimiento 30 host 
+
+256 128 64 >32< 16 8 4 2
+
+255.255.255.11100000
+
+256-32=224
+
+8+8+8+3=/27
+
+Saltos de 32.
+
+Subred= 10.188.31.0 
+Primera IP valida = 10.188.31.1
+Ultima IP valida= 10.188.31.30
+Broadcast= 10.188.31.31
+Siguiente salto de IP de red= 10.188.31.32
+
+
+> LAB 14
+
+Nos dan la direccion de red: 172.16.28.252
+Nos dan la mascara de subred 255.255.240.0
+
+Encuentre la direccion de red a la que pertenece esa IP
+
+172.16.28.252
+
+255.255.<octecto afectado>.0
+
+256-240=16 saltos para subred 2^4=16 
+
+4 bits prestados para subred. 
+
+11111111.11111111.11110000.00000000
+
+8+8+4 /20
+
+255.255.240.0 
+
+Clase B.
+
+172.16.0.0/20
+
+Son saltos de 16( Decimal) 
+
+1- 172.16.0.0
+2- 172.16.16.0
+
+172.16.28.252 perteneces al segmento de red 172.16.16.0/20
+
+3- 172.16.32.0
+
+
+
+Direccion de red: 
+
+/21 240 
+
+Saltos de red 16
+
+0-15
+16-31
+32- 
+
+Direccion de red 172.16.16.0/21
+
+
+> LAB 15
+
+Switch A : VLAN nativa OK
+Switch B: No VLAN native
+
+- Aparece un mensaje de error de desajuste de VLAN nativa.
+
+
+
+> LAB 16
+
+Dado los siguientes datos , es correcto asignar la IP 192.168.20.31 a un host si se conoce: 
+
+RED= 192.168.20.24/29
+
+Router = 192.168.20.25
+
+Servidor de ventas= 192.168.20.31
+
+192.168.20.0/29
+
+255.255.255.11111000
+
+
+2^3= 8 
+
+Saltos de 8 
+
+Rango de host
+
+192.168.20.0
+192.168.20.8
+192.168.20.16
+192.168.20.24
+
+Entre la red 192.168.20.24 y el siguiente salto esta la ip 192.168.20.31 pero esta por ser la ultima es la que se designa para el broadcast
+por lo tanto no puede ser asignada para un host(Servidor de ventas). 
+
+192.168.20.32 
+
+> LAB 17
+
+ROuter DTE >>>> CSU/DSU synchronouns ( DCE) >>> WAN services provider network.
+
+
+> LAB 18
+
+Router A = 192.168.1.62/27 
+Router B= 192.168.1.65/27
+
+Las direcciones anteriores estan asignados a interfaces que conecta ambos routers. Se presenta problema de comunicacion, a que se debe?
+
+/27 255.255.255.224
+
+11100000
+
+
+2^5 = 32 , Saltos de 32
+
+Router A y B sus interfaces estan en segmentos de red distintos.  
+
+> LAB 19 
+
+
+
+> LAB 20 subneting
+
+> LAB 21 subneting
+
+> LAB 22
+
+> LAB 23
+
+> LAB 24
+
+> LAB 25
+
+> LAB 26
+
+> LAB 27 Subneteo
+
+> LAB 28
+
+> LAB 29 
+
