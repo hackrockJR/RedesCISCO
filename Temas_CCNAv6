@@ -1,0 +1,1048 @@
+Temas para examen CISCO CCNA
+
+1 > GLBP 
+
+- Que router respondera a las peticiones APR client: La puesta virtual activo (AVG) respondera con 4 posibles virtual mac-address.
+- AVG Puesta de enlace virtual activo / active virtual gateway), es el responsable de la solicitud ARP. 
+- GLBP Gateway load balancing protocol , es un protocolo propetario de CISCO para router redundantes. 
+- GLBP soporta texto plano y autenticacion de contraseña MD5 entre grupos GLBP.
+- GLBP soporta 1024 routers virtuales. 
+- GLBP puede cargar trafico compartido a traves de un maximo de 4 routers. 
+
+
+2 > OSPF
+
+- Configurar OSPF y agregar la ruta 10.1.1.0/24 
+
+router ospf 1
+network 10.1.1.0 255.255.255.0 area 0
+
+- Diferentes identificadores de procesos pueden ser usados en OSPF.
+- Los numeros del proceso puede er entre 1-65535
+- El parametro para calcular el costo OSPF en router de CISCO es el ancho de banda (bandwitch).
+- El maximo de rutas de igual costo de una configuracion OSPF en router CISCO es de 8. 
+- Errores a corregir al momento de establecer una relacion de vecino OSPF:
+
+* Intervalos de hello y dead no son iguales en R1 y R3.
+* R1 y R3 estan configurado en area difernetes. 
+* El comando CDP run en modo de confiuracion global es usado : R1# CDP run
+
+- La distancia administrativa por defecto de OSPF es de 110. 
+
+- Grandes redes OSPF usan diseño jerarquico:
+
+* Para reducir routing overhead.
+* Para acelear la convergencia. 
+* Para confiar inestibilidad de la red a las areas individuales de la red. 
+
+- OSPFv3:
+
+Mejoras de OSPFv3:
+
+* Soporta multiples subredes IPv6 en un solo enlace.
+* Enruta a traves de enlaces , en vez de a traves de redes. 
+
+- Es compatible con VLSM.
+
+- Limita inestabilidad de la red a una area de la red.
+
+- Permite un amplio control de las actualizaciones de enrutamiento.
+
+- ID OSPF router en el se identifica el origen de un tipo 1 LSA.
+
+- El router elige automaticamente una direccion IP de loopback como el ID OSPF router. 
+
+* LSA Link state adverstisement. 
+
+- El comando:
+
+network 0.0.0.0 255.255.255.255 area 0 , incluye todas las interfaces.
+
+- Para formar adyacencia OSPF se debe tener que coincidir los intervalos hello y dead.
+
+- Beneficio de usar OSPF:
+
+* Reduce los LSAs que se generan. 
+* Se eliminan la necesidad de enlaces virtuales.
+
+
+
+3 > VLAN
+
+- Tramas sin tagear (etiquetar) se encapsulan en la vlan nativa; En el caso que dos switches esten etiquetadas en VLANs diferentes se cambiara a la VLAN nativa de destino.
+- Al ejecutar el comando switchport access vlan 3 en una interfaz sin haber configurado antes la vlan3 , este se agregara a vlan.dat
+- Ventajas de las VLANs: 
+
+* VLANs establecen dominios de broadcast en redes de switches.
+* VLANs permiten acceso a servicios de redes en departamentos de diferente localizacion fisica.
+* VLANs puede simplificar considerablemente la addicion , el movimiento o el cambio de host en la red. 
+
+- Las operaciones de VLAN en un CISCO Catalyst switch como:
+
+* Los frames unicast unknow seran retransmitido solo a los puertos que pertenecea a la misma VLAN. 
+
+- VLAN nativa: 
+
+* El resultado del comando switchport trunk native vlan 999 es designar la VLAN999 a trafico sin tagear.
+
+- El switch port trunk puede estar en los siguientes modos:
+
+* Auto.
+* On.
+* Disable.
+
+- Beneficios de crear VLANs:
+
+* Agregar seguridad.
+* Ofrece segmentacion.
+
+- Los protocolos 802.1q e ISL (inter switch link) propetario de CISCO permiten enviar multiples VLANs por un enlace.
+
+- Beneficios de usar VLANs:
+
+* Permite agrupar usuarios por funcion.
+* Mejora la seguridad de la red.
+* Aumenta el numero de dominios de Broadcast mienstras disminuye el tamaño de los dominios de broadcast. 
+
+- Beneficios de implementar VLANs:
+
+* Mayor nivel de seguridad , al separar el trafico de datos sensibles del resto de la red. 
+* Uso eficiente de ancho de banda , se usa permitiendo que muchas redes logicas utilicen la misma infraestrucutura de red. 
+* Mitigar tormenetas de Broadcast , aumentando el numero de broadcast , disminuye el tamaño.
+
+- VLAN 1:
+
+* Cuando la VLAN 1 esta administrativamente down no permitira la conexion remota al switch. 
+
+- El rango de VLANs que se pueden agregar , modificar y eliminar es entre 2-1001 , ya que la VLAN1 es la por defecto y de 1002-1005 son VLAN por defecto para FDDI & Token ring
+
+- Cada VLAN crea su propio dominio de broadcast.
+
+- Al estar fullduplex cada puerto es un dominio de colision independiente. 
+
+- Para poder enrutar entre VLANS para lograr comunicacion , se debe crear subinterfaces en la interfaz que conecta a las VLANs.
+
+- Elementos que se deben utilizar al configurar una interfaz del router para VLAN trunking:
+
+* Una direccion IP para cada subinterfaz.
+* Identificador de encapsulation subinterfaz que coinciden con las etiquetas VLAN.
+* Una subinterfaz por VLAN .
+
+- 
+
+
+
+
+ 
+
+4 > IPv4 / IPv6
+
+- El equivalente a una direccion de loopback de una interfaz en IPv4 127.0.0.1 en IPv6 es ::1 o ::1/128
+
+- Dos razones porque cambiar de IPv4 a IPv6:
+
+* No Broadcast.
+* Autoconfiguracion , permite obtener IPv6 de manera automatica. 
+
+- fe80::/10 se reservo para direcion Link-local IPv6 por ejemplo:
+
+FE80::380E:B11A:E14F:3D69 
+
+- Tres metodos para migrar un esquema de IPv4 a IPv6:
+
+* Habilitar dual-stack routing.
+* Configurar tuneles IPv4 entre Ipv6 islands.
+* Usar proxy y translation para traducir paquetes IPv6 en IPv4.
+
+- Una unica interfaz se puede asignar multiples direcciones IPv6 de cualquier tipo. 
+- Cada interfaz IPv6 incluye al menos una direccion de loopback.
+
+- Direcciones Anycast Ipv6:
+
+* Modelo de comunicacion one-to-nearest.
+* La misma direccion para multiples dispositivos en el grupo. 
+* Entrega de paquetes a la interfaz de grupo que es mas sereno al dispositivo de envio.
+
+- 16 bits estan contenido en un campo de direccion IPv6.
+
+- Caracteristicas de IPv6 
+
+* Anycast.
+* Multicast.
+
+- Comando para configurar una IPv6 address en una interfaz:
+
+ipv6 address 2001:db8:2222:7272::72/64
+
+- Loopback address 
+
+* ::1
+
+- Global address:
+
+* 2000::/3
+
+- Grupos de multicast en Ipv6:
+
+* ff02::1 -> all nodes en el segmento de LAN.
+* ff02::2 -> all router en el segmento de LAN.
+
+- Dado la siguiente IPv6 cual es la notacion alternativa:
+
+B514:82C3:0000:0000:0029:EC7A:0000:EC72
+
+Notacion alternativa: 
+
+B514:82C3::0029:EC7A:0:EC72
+
+- Al asignar una ip privada a una interfaz de red publica (WAN del ISP) no se pueden rutear en el backbone del internet.
+
+- Caracteristicas IPv6:
+
+* Autoconfiguracion
+* No broadcast
+* plug and play 
+
+- Comando para habilitar el reenvio IPv6 en un router CISCO:
+
+ipv6 unicast-routing * Si no se reconoce el comando el IOS no es compatible con IPv6.
+
+
+- Representado por grupos de 8 , hexadecimales separado por : 
+
+2031:0:130f::9c0:876a:130B
+
+
+
+
+5 > MAC - address
+
+- Un ID de interfaz con formato EUI-64 creado de una mac-address de 48 bits es mediante la inserccion de 0xFFFE entre los tres bytes superiores y los tres bytes inferiores de la 
+direccion MAC.
+
+Ejemplo:
+
+MAC: 22:AC:9E:18:BE:80
+EUI-64: 22:AC:9E:FF:FE18:BE:80
+
+- El resultado del comando show mac address-table no muestra la mac de destino de una trama , por lo que el switch tendra que consultar a todos los puertos menos 
+al de origen de la trama.  
+
+6 > Spanning three
+
+-Dos switches con la misma prioridad , el switch con la menor MAC-address tendra la prioridad.
+- Al ejecutar el comando: show spanning-tree vlan30 se encuentran los siguientes resultados:
+
+* Todos los puertos pueden estar en el estado discarding, learning o forwarding, ya que la configuracion es designada. 
+* La prioridad de bridge es menor que el por defecto (32768) , menor es 24606.
+* Todos los puertos designados son del estado forwarding.
+
+- Prioridad de MAC-address:
+
+* 32768:112233445566 ( Esta MAC-address tiene prioridad).
+* 32768:223344556677
+* 32769:112233445565
+
+- La razon por lo que una interfaz no es root en una topologia de STP , es porque el costo es el mas alto que otro en la topologia. 
+
+- Cuando los switches en una topologia spanning-tree estan en el estado de blocking o forwarding se dice que han convergido.
+
+- El resultado del comando show spanning-tree vlan 20 es que el switch no es un puente raiz (bridge root) , porque no todos los roles de las interfaces son designadas. 
+
+- El valor del Bride-ID priority define si el switch es el root bridge, cuando es mas alto que la prioridad raiz no es elegido para ser el root bridge:
+32769 > 32768.
+
+- El costo de la ruta se utiliza principalmente para determinar que puerto se convierte en root port o no. 
+
+- Durante el camino de un paquete las direcciones ip de origen y destino no cambian , pero si las MAC-address para cada salto que da , principalmente de un router.
+
+- Para lograr identificar el switch raiz y las interfaces desiganadas si esta operando el mismo ancho de banda y la prioridad es la por defecto. 
+
+- El protocolo STP y el estandard 802.1d son de capa 2 y permiten eliminar bucles. 
+
+7 > RSTP
+
+- Reduce significativamente el tiempo en que la topologia vuelva a converger despues del fallo de un enlace.
+- Amplia las funciones de puertos STP mediante de addiciones de roles alternativos y de respaldo. 
+- Ofrece una transicion rapida al estado de forwarding en enlaces point-to-point de STP.
+- Para habilitar RSTP en un switch se usa el comando spanning-tree mode rapid-pvst . 
+- Estados de RSTP cuando han convergido: 
+
+* dicarding (descarte)
+* Forwarding (reenvio)
+
+- RSTP (Rapid spanning-tree protocol)
+- RSTP define nuevos roles de puertos. 
+- RSTP es compatible con el original IEEE 802.1d STP.
+- Opera a nivel de capa 2 , se basa en el intercambio de BPDU entre switches , se utiliza para elegir el puente raiz de cual usa la MAC. 
+
+
+
+
+
+
+8 > Interface , MTU 
+
+- El resultado del comando show interface fa0/1 muestra 741 salidas de errores y 783 CRC al estar conectado a otro switch. En la interfaz fa 0/1 esta en modo fullduplex .
+El siguiente paso es validar el puerto del segundo switch que no este modo duplex. 
+
+- Definiciones: 
+
+* Hop count: El numero de enlace punto a punto en una via de transmision.
+* bandwitch: La capacidad de transferencia de datos en un enlace. 
+* Delay: La cantidad de tiempo para mover un paquete desde el origen al destino. 
+* Load: La cantidad de actividad en un recurso de red. 
+* Reliability: Se refiere a la tasa de error en cada enlace de red. 
+* Cost: Un valor configurable basado de forma predeterminado en el ancho de banda . 
+
+- MTU : Unidad maxima de transmision define el maximo de paquetes de capa 3 (en bytes ) que la capa puede pasar en adelante. 
+
+
+9 > SNMP
+
+- Tres componentes de SNMP son:
+
+* MIB
+* SNMP Manager
+* SNMP agent
+
+- Trap alerta al administrador SNMP una condicion de la red.
+
+- Un frame de SNMP esta conformado por lo siguiente componentes: 
+
+* MIB
+* Agent
+* manager
+
+- El protocolo SNMP puede causar overload en el CPU del dispositivo de administracion. 
+
+- Mensajes de alertas generados por SNMP agents called:
+
+* Trap
+* INFORM
+
+
+
+
+10 > Etherchannel
+
+- La agrupacion de 4 interfaces en grupo de canal 1. La interfaz del port-channel 1 sera configurada la IP en un etherchannel de capa 3.
+- Problemas con EtherChannel puede ser causado por conectar interfaces a distintas velocidades:
+
+10 mb/s no es igual a 100 mb/s
+
+- La configuracion de negociacion DTP (Dynamic trunking protocol) puede ser diferentes en los puertos de etherchannel. 
+
+
+
+11 > EIGRP
+
+- Un sucesor factible es una ruta de respaldo a un destino que se mantiene en la tabla de topologia.
+- El resultado del comando show ip eigrp neighbors , permite ver a direccion ip con la que el dispositivo ha establecido adyacencia y el intervalo de retansmision y la cuenta en cola.
+- Agregar una subred con el siguiente comando:
+
+configure terminal
+router eigrp 12
+network 192.168.77.0
+
+ 
+
+12> Syslog
+
+- Los destinos populares para guardar mensajes syslog son :
+
+* RAM
+* Terminal de consola
+* Syslog server
+
+- El comando: 
+
+* service timestamps debug datetime msec instruye el dispositivo un mensaje de depuracion syslog en milisegundos.
+
+- El numero asignado a EIGRP debe ser el mismo para que permita actualizar los enrutamientos en la pc.
+
+- El local 7 es el level por default de syslog facility. 
+
+- syslog de level 3 trap envia los siguinetes mensajes de log: 
+
+* Emergencies.
+* Alertes.
+* Critical
+* Errors
+
+- Mensajes loggins
+
+Al ejecutar el comando:
+
+Router(config)# logging trap 4 
+captura los siguientes mensajes:
+
+* Emergency
+* Alert 
+* Error 
+* Warnning
+
+- Syslog server ofrece espacio necesario de almacenamiento necesario para los logs. 
+- Existen mas mensajes syslog disponibles dentro el CISCO IOS que lo que muestra SNMP.
+- Syslog server ayuda en la agregacion de registros y alertas. 
+
+- Mesages:
+
+% Line proto-5-up Down Line protocol on interface fa0/1 change state to down.
+
+% Dual-5-NBRChange : IP-EIGRP 1: Neighbor 10.10.11.2 (fa 0/1) is down.
+
+Es referencia que un comando de cierre fue ejecutado en la interfaz fa0/1 haciendo que la adyacencia EIGRP para a estado down.
+
+
+
+
+13 > Netflow
+
+- Con netflow es una caracteristica de CISCO IOS que se habilita para señalar una aplicacion que esta causando red lenta. 
+
+- Beneficios: 
+
+* Network, aplication & server monitoreo.
+* Secusity Analysis.
+* Contabilidad / facturacion. 
+
+- La direccion de origen, la interfaz de entrada , la direccion IP de destino: Tiene que ser el mismo en una secuencia de paquetes Netflow. 
+
+- Tres factores antes de implementar Netflow:
+
+* Utilizacion del CPU.
+* Donde se enviaran los datos de Netflow.
+* Numeroo de dispositivos exportar datos Netflow
+
+- El comando show ip cache flow visualiza los datos generales de netflow , muestra un resumen de estadisticas. 
+
+
+
+14 > Seguridad de puerto , port security: 
+
+- Si esta activo el aprendizaje de direcciones MAC , el switch aprendera las MAC-address hasta el numero maximo definido. 
+
+- El aprendizaje port sticky permite agregar direcciones MAC a running-config.
+
+- Netflow utiliza:
+
+* La direccion IP.
+* El numero de puerto. 
+* Protocolos tipos L3.
+
+para considerar el trafico en un mismo flujo de IP. 
+
+- Comandos para evitar el acceso ilegal a la capa de acceso:
+
+switch(config-if)# switchport mode access
+switch(config-if)# switchport port-security maximum 1
+
+- Para permitir un solo host en un puerto de switch se debe configurar switchport port security / switchport port-security maximum 1/
+switchport security restrict / switchport port-security mac-address sticky
+
+- Comandos para verificar la seguridad de puerto:
+
+sw# show running-config 
+sw# show port-security interface fa 0/12
+
+
+
+
+
+
+
+
+
+15 > ACL
+
+- Para verficar las interfaces que son afectadas por ACL , usamos el comando show ip interface. 
+- Las ACL dinamicas permite autenticar a un usuario remoto con nombre de usuario y contraseña.
+- El proceso de autenticacion se hace por el router a un servidor de acceso central tal como TACACS+ o Radius server.
+- Orden ACL:
+
+A. permit any
+B. deny 172.21.1.128 0.0.0.15
+C. permit 172.21.1.129 0.0.0.0 
+D. permit 172.21.1.142 0.0.0.0 
+
+Orden: CDBA o DCBA ambos ordendes son validas. 
+
+- Para eliminar una ACL de una interfaz , usamos el comando no ip access-group 102 out (ejemplo)
+
+- Las ACL standard se basan en direccion de origen y mascara wildcard.
+
+
+
+
+16 > Password , encriptacion
+
+- VTY password permite establecer conexiones remotas para una session de telnet. 
+- El comando service passsoword-encryption permite encriptar los password que estan en texto plano. 
+
+- Asignacion de contraseñas:
+
+por acceso remoto > vty password
+por acceso consola > console password
+por acceso a redes o recursos > access-group 
+visualizar las contraseñas > Service passsoword-encryption
+Por acceso a modo privilegiado > enable secret
+
+
+
+17 > Herramientas CISCO IOS
+
+- Para vaidar conectividad desde un dispositivo con IOS usamos los comandos:
+
+* ping
+* show ip route 
+* show interfaces
+
+- Se solicita borrado de contenido flash actual, durante el dialogo de copia al actualizar la imagen del IOS desde el servidor TFTP.
+
+- En una flash que almacena 8mb y tiene en uso un IOS con el tamaño de 3.8 mb , es posible cargar un IOS de 4 mb. 
+
+- El comando traceroute address permite verificar la ruta de capa 3 a un host.
+
+- El resultado del comando service password-encryption es encriptar los passsowords actuales y futuros. 
+
+- copy running-config startup-config :
+
+* Al entrar a la configuracion de dialogo al inicio del arranque y no muestra resultado alguno es porque el administrador fallo al guardar la configuracion. 
+
+- Los comandos globales son aquellos que al ejecutarse afecta a todo el router. 
+
+- Que se debe hacer para instalar una nueva version del IOS de CISCO en un router , que comando usar:
+
+* Validar la cantidad de flash y la memoria RAM .
+
+* USar el comando show version. 
+
+ 
+
+
+
+18 > Frame relay , PVC
+
+- El resultado del comando show interface muestra como resultado LMI enq sent 2474988 lo cual indica que se esta usando el protocolo frame relay en entorno WAN. 
+- ARP inversa frame relay:
+
+* El proposito de una inversa ARP es para mapear una DLCI (Data link connection identifier) a una direccion IP.
+
+- Caracteristicas de frame relay PPP:
+
+* Requiere una subred dentro de un dominio de enrutamiento.
+* emulate leased lines.
+
+- Si el resultado del comando show frame-relay map es:
+
+serial0/0(up):ip 172.16.3.1 dlc 100 (0x64x1840)
+
+Significa que el mapeo entre DLCI 100 y la estacion final 172.16.3.1 , la direccion IP se conoce a traves de ARP inverso. 
+
+- Cuando se supera el CIR todo el trafico es marcado como discard eligible.
+
+CIR (committed information rate) (velocidad de informacion comprometida).
+
+DE (discard eligible) significa que se puede caer si se produce la congestion dentro del frame relay network.
+
+- Acronimos de frame relay :
+
+* DTE = Un router es de este tipo de dispositivo. 
+* PVC = El tipo mas comun de circuito virtual.
+* LMI = Proporciona mensajes de estado entre DTE y DCE dispositivos.
+* DLCI = Identifica la conexion virtual entre la conexion DTE y el switch.
+
+- Al ejecutar el comando show frame-relay map out podemos ver:
+
+* El valor de las DLCI locales.
+* El estado del PVC que esta configurado en el router.
+
+- El comando frame-relay map ip 10.171.16.8.102 broadcast. La opcion broadcast permite que los paquetes , tales como actualizaciones de RIP puedan ser enviados a traves de la PVC.
+
+- PVC permanet virtual circuit.
+- DLCI Data Link connection identifier, es el ID que se asocia a frame relay , puede valer del 0 1023 comunmente se usan del 16-1007 el resto es reservado.
+- En las conexiones punto a punto se deben usar dentro de la misma subred , conexiones de un punto a otro deben ser diferentes. 
+- Map statement valida las DLCI por donde enviar el trafico.
+
+- Del resultado del comando show frame relay pvc , el BECN indica al router que el trafico enviado al sitio remoto experimento o no sobrecarga de trafico.
+
+- El resultado del comando show frame-relay pvc :
+
+pvc status = inactive , significa que PVC esta configurado correctamente en el switch , pero existe un problema en el extremo remoto.
+
+
+19 > Enlaces Trunk
+
+- Comandos para verificar enlaces troncales:
+
+* show interface trunk
+* show interface switchport
+
+- El comando switchport mode trunk, permite conectar switches en modo troncal.
+
+- El comando switch modetrunk permite cruzar multiples VLAN en la interfaz que se configura.
+
+
+20 > 802.1q
+
+- Caracteristicas:
+
+* Modificar el header frame de 802.3 y por lo tanto requiere recomputar los FCS ( Frecuencia de comprobacion de trama).
+* Es un protocolo de enlace troncal capaz de transportar tramas sin etiquetar. 
+
+- 802.1q es etiquetado por defecto en el frame de una VLAN nativa.
+
+- Los trunks 802.1q se pueden utilizarse en interfaces ethernet de 10 mb/s
+
+- Los trunks 802.1q usan VLAN nativas en ambos extremos. 
+
+
+21 > Switch capa 2 , Hub
+
+- Para decidir por donde enviar una trama , los switches de capa 2 usan las MAC-address de destino. 
+- En un entorno de switches , el standard IEEE 802.1q  se describe como un metodo de VLAN trunking.
+- Un switch no puede aprender una direccion de broadcast porque la direccion de broadcast nunca sera la direccion de origen en un frame. Los switches aprende las MAC basado 
+en el origen.
+- Si reemplazamos un hub con un switch:
+
+* El numero de dominios de colision aumentaria.
+* El numero de dominios de broadcast seguiria siendo el mismo.
+
+- El Switch es elegido por la prioridad mas baja , en el caso de ser la misma , por la MAC mas baja. 
+
+- Para permitir comunicacion al switch de redes remotas , es necesario configurar en los switches el default-gateway con el siguiente comando:
+
+ip default-gateway 192.168.24.1
+
+- Posiblles modos que un enlace troncal puede estar:
+
+* Auto 
+* On 
+* Disiable
+
+
+
+
+
+22 > Router
+
+- Al iniciar un router completa el proceso de POST, listo para buscar una imagen IOS , luego de comprobar la configuracion de registro.
+- Al conectar dos router por enlaces seriales con encapsulamiento distintos no se podran establecer comunicacion entre ellos. 
+- Descripcion de switch capa 2 ethernet:
+
+* Establecer VLANs aumenta el numero de dominios de broadcast.
+* Microsegmentacion disminuye el numero de colisiones de red. 
+
+- El router envia mensajes de destino inancanzable por ICMP . Si el destino no es alcanzado por una interfaz apagada en el router. 
+
+- La razon por lo que dos routers no logren adyacencia es porque los tiempos de dead y hello en los routers sean diferentes.
+
+- IOS del router carga del TFTP con el uso de comandos especificos y el router no puede encontrar una imagen de IOS valida en la memoria flash , puede ser el resultado de ejecutar
+el comando show version. 
+
+- Se ha ejcutado el comando subnet-zero lo cual e una subred 172.16.3.0/30 es valida. De la red es 172.16.3.96/27 a la siguiente subred 172.16.3.128/26
+2^6= 128 -> 255.255.255.11000000 = 192
+
+- Para conectar un router con dos interfaces fisicas a cuatro VLAN de la red local debe implementar router-on-a-stick , en una interfaz permitiendo asi multiples subinterfaces.
+
+
+
+
+
+
+
+23 > Enrutamiento de estado de enlace 
+
+- Caracteristicas: 
+
+* Proporciona vision comun de toda la topologia. 
+* Calcula la ruta mas corta. 
+* Utiliza actualizaciones activadas por evento. 
+
+24 > SNMPv2
+
+- En SNMPv2 es usado el tipo de autenticacion community strings.
+
+
+25 > VRRP
+
+- VRRP object tracking asegura el mejor router vrrp sea el virtual router master del grupo. 
+
+26 > NAT
+
+- Beneficios de usar NAT:
+
+* Con NAT elimina la necesidad de re-direccionar todos los host que requiere acceso remoto. 
+* NAT protege la seguridad de la red, ya que no anuncia las redes privadas. 
+
+- NAT overload or PAT permite usar pocas IP publicas para una cantidad de IP locales que las sobrepasan.
+
+
+
+27 > DHCP
+
+- El servidor DHCP asigna IP a host:
+
+* El host mantendra la misma direccion IP si se mantiene periodicamente en contacto con el servidor DHCP. 
+
+- Funciones del DHCP: 
+
+* Configurar parametros de IP address del servidor DHCP al host.
+* Asignar y remover IP de un pool por defecto.
+
+28 > Comando show 
+
+- El comando show version muestra el ultimo metodo de reset del router. 
+
+- Con el comando show processes permite ver la utilizacion del CPU. Tambien show process cpu history
+
+- Si se detecta un conflicto de direciones IP , la direccion se elimina del pool y el administrador de red debe resolver el conflicto.
+
+
+
+
+
+29 > WAN  
+
+- Algunas de las funciones de una red WAN son:
+
+*  CSU/DSU terminal digital local loop. 
+* Modem termina Analog local loop.
+* Un router es comunmente un dispositivo DTE.  
+
+- Metodos de conectividad en WAN:
+
+* PPP (point-to-point)
+* DSL (Digital subscriber Link)
+
+
+30 > OSI
+
+- Proceso de encapsulacion: (algunos)
+
+* La capa de transporte divide el flujo de datos en segmentos, añade fiabilidad y control de flujo de la informacion.
+* Los paquetes se crean cuando la capa de red encapsula una trama con direccion de origen y destino y protocolo related  control de la informacion.
+
+- Un usuario no se conecta a internet en que orden se verifica basando en las capas de OSI iniciando de la primera:
+
+* Step 1 : Verify Ethernet cable connection.
+* Step 2 : Verify NIC operation.
+* Step 3: Verify IP configuration.
+* Step 4: Virify URL.
+
+- Un host receptor calcula la suma de comprobacion en un frame y determina que frame esta dañado , entonces se descarta. Esto sucede en la capa de enlace de datos.
+
+- La capa de aplicacion es responsable de determinar la disponibilidad del programa de recepcion y comprobacion para ver si existen suficientes recursos para esta 
+comunicacion. 
+
+- Layer:
+
+
+Network layer 			Transport layer
+
+routing						Segmentos
+IP address 					UDP
+packets						windoming
+
+
+
+
+
+31 > Ruta o enrutamiento. 
+
+- Las rutas por default se deben indicar porque interfaz salir.
+- Las rutas estaticas se pueden definir para alcanzar redes remotas. 
+- Las rutas por default son definidas cuando existen diferentes rutas que se desean alcanzar , por ejemplo enrutar a Internet. 
+- Cuando un router aprende una subred por dos rutas de igual costo , el trafico a esa red se balanceara la carga.  
+- Ventaja del enrutamiento estatico:
+
+* Aumenta la seguridad porque solo el administrador de la red puede cambiar la tabla de enrutamiento.
+* Se reduce la carga de trafico de enrutamiento cuando usa segmentos de redes. 
+
+- Al implementar distintos protocolos de enrutamiento con metricas diferentes, la ruta que se alcanza por todos los protocolos de enrutamiento sera por el de menor distancia 
+administrativa:
+
+Ruta de origen 							Distancia administrativa
+
+Directamente conectado							0
+Statica											1
+EIGRP											90
+EIGRP ruta sumarizada							5
+OSPF											110
+RIP												120
+
+- Al ejecutar un protocolo de enrutamiento de link-state se puede construir y administrar la base de datos de la topologia con la informacion:
+
+* Paquetes hello.
+* LSAs de otros routers (Notificacion de estado de enlace). 
+
+- La distancia administrativa es un parametro que afecta al seleccionar una ruta , cuando exite tambien protocolo de enrutamiento dinamico. 
+
+- Protocolo de vector distancia en routers:
+
+* Envia actualizaciones periodicas , indpendientemente de los cambios de topologia.
+* Actualizacion de la tabla de enrutamiento basada en actualizaciones de los vecinos RIP, EIGRP.
+
+- Protocolo de estado de enlace:
+
+* Se basa en el ancho de banda , carga y confiabilidad de los destinos: OSPF , IS IS
+
+- Cuando existe un host que se conoce por distintas rutas con mascaras de subred diferentes que las contiene , se usa la ruta con la mascara mas especifica.
+
+Ejemplo:
+
+10.1.5.64/28
+10.1.5.64/29<------- Subred mas especifica. 
+10.1.5.64/27
+
+32 > PVST+, Rapid -PVST
+
+- ( Per VLAN spanning-tree) 
+- Beneficios de utilizar PVST+ : 
+
+* Permite la localizacion de un switch raiz para ser optimizado para VLAN. 
+
+- El estado de puerto para intriducir Rapid-PVST  es discarding ya que en STP , rapid-pvst incluye un nuevo estado "discarding"
+
+- Posibles causas de un protocolo esta abajo  en una interfaz de router.
+
+* La interfaz no esta recibiendo una señal de reloj CSU/DSU.
+* La encapsulacion no coinciden.
+
+
+33 > Fisica
+
+- Validar la comunicacion en la capa fisica:
+
+* Validar los cables A y B son straight-through.
+* Asegurar la energia. 
+* Reconectar lo cables.
+
+- Ethernet usa las direcciones fisicas (MAC):
+
+* Para identificar los dispositivos de capa 2.
+* Para permitir la comunicacion entre los diferentes dispositivos en la misma red. 
+
+- En una red ethernet los dispositivos pueden trasnmitir comando cuando:
+
+* No se detecta otro dispositivo enviando. 
+* cuando el medio esta inactivo. 
+
+34 > PPP
+
+- PPP autenticacion CHAP-PAP:
+
+* En una interfaz serial se debe usar el comando: Router(config-if)# ppp authentication  chap pap para usar PAP como metodo de reserva, en el caso de CHAP no este disponible. 
+
+- Para encapsular con dispositivos que no son CISCO que usan HDLC para encapsular usamos PPP , ejemplo: Router(config-if)# encapsulation ppp.
+
+- PPP es un protocolo de capa2 del modelo OSI. 
+
+- Un subprotocolo PPP como opcion de autenticacion es LCP (Link control Protocol)
+
+- LCP negocia enlaces y parametros PPP.
+
+35 > Telnet
+
+- Para encriptar la contraseña de telnet configurada en un router se debe usar la siguiente lineas de comando:
+
+service password-encryption
+line vty 1
+login
+passsoword CISCO 
+
+- Telnet connectios:
+
+El resultado del comando show session mostrara las conexiones activas de telnet.
+
+36 > NVRAM
+
+- Al parecer el dialogo de configuracion inicial en un router es porque no se encuentra el archivo de configuracion en la NVRAM. 
+
+37 > Ruta por defecto
+
+- Sintaxis de una ruta por defecto:
+
+ip route <red-remota> <netmask> <Direccion del proximo salto>
+
+38 > Router_on_a_Sticky
+
+- - Cuando se establece Router_on_a_Sticky para tres VLANs con su gateway ya establecido , no se requiere de enrutamiento dinamico o estatico porque son redes directamente conectadas. 
+
+
+39 > Gateway
+
+- Los comandos:
+
+ip default-network 0.0.0.0 
+ip route 0.0.0.0 0.0.0.0 172.16.2.1
+
+ambas se pueden ser utilizada para establecer el gateway.
+
+40 > SSH
+
+- Al configurar las lineas VTY 0 4 con passsoword permite usar el protocolo SSH para comunicacion entrante a traves de los puertos vty en un dispositivo CISCO.
+
+
+41 > Dominio de Broadcast
+
+- El resultado de conexiones de switches con hubs y los switch con la VLAN por defecto , todos pertence al mismo dominio de broadcast. 
+
+42 > SNMP V3 y v2
+
+- SNMPv3 : Mejora caracteriticas de seguridad.
+- SNMPv2 : Agrega mensajes de informe.
+- SNMPv2 : Agrega mensajes getbulk (solicitud de tablas)
+- SNMPv3 : caracteristicas:
+
+* Mensaje integrado.
+* autenticacion.
+* Encriptacion.
+
+
+
+43 > Mensajes logging
+
+- Mensajes loggins
+
+Al ejecutar el comando:
+
+Router(config)# logging trap 4 
+captura los siguientes mensajes:
+
+* Emergency
+* Alert 
+* Error 
+* Warnning
+
+- Syslog server ofrece espacio necesario de almacenamiento necesario para los logs. 
+- Existen mas mensajes syslog disponibles dentro el CISCO IOS que lo que muestra SNMP.
+- Syslog server ayuda en la agregacion de registros y alertas. 
+
+44 > HSRP
+
+- En el router maestro HSRP estan activos la IP virtual y la direccion MA+ k44c virtuales
+- HSRP los temporizadores por defecto son hello=5 , dead= 10
+- HSRP soporta 255 grupos por interfaz. Equilibrio de carga. 
+- Direccion MAC validas de HSRP virtual:
+
+ficticias:
+
+0000.0c07.ACxx  > xx grupo OSPF 
+0000.0c9f.fxxx 
+
+0005.73A0.0000
+0005.73A0.0FFF
+
+
+45 > VPN
+
+- Ventajas de una VPN sobre los enlaces puntos a puntos:
+
+* Costo reducido.
+* Aumento de la seguridad.
+* Escalabilidad.
+
+- 
+
+
+46 > Estado de puerto 
+
+- Serial 0/1 is up , line protocol is up > puerto operacional.
+- Serial 0/2 is up , line protocol is down > Layer 2 problem.
+- Serial 0/1 is down , line protocol is down > Layer 1 problem.
+- Serial 0/1 administratively down , line protocol down> port disable.
+
+
+47 > Remote access
+
+Remote access:
+
+switch(config)#ip default-gateway 192.168.8.254
+switch(config)#interface vlan1
+switch(config-if)#ip address 192.168.8.252 255.255.255.0
+switch(config-if)#no shutdown
+
+Permite la comunicacion , si se establece una session remota.
+
+48 > DTP 
+
+- Dynamic trunking protocol
+
+El estandard 802.1q inicia con la finalizacion exitoso de DTP en un switch sobre fastethernet. 
+
+
+49 > TLL
+
+- Si un TLL es de 255 al iniciar un ping y el destino esta a dos saltos , el valor del TLL es de 253. 
+
+
+
+50 > IETF
+
+- IETF es el tipo de encapsulamiento que es compatible con CISCO . La otra seria la propia de CISCO.
+- IETF permite conectar un router CISCO con uno que no es de CISCO.
+
+
+
+51 > Interfaz virtual / VTY
+
+- Para asegurar una interfaz virtual , se debe configurar:
+
+* Proceso de inicio de sesion y contraseña de terminal virtual.
+* Aplicar una access-list en la interfaz virtual usando el comando access-class
+
+ejemplo:
+
+R# configure terminal
+R(config)# access-list 1 deny 192.168.2.0 0.0.0.255 any 
+R(config)# access-list 1 permit 192.168.3.0 0.0.0.255 any
+R(config)# line vty 1 
+R(config-line)# access-class 1 in vrf-also
+R(config-line)# end
+R#show line 1
+
+
+
+52 > BPDU / portfast /STP
+
+- Para evitar bucle entre conexiones de switches con enlaces troncales usamos el comando BPDU guard en un puerto portfast.
+
+53 > Intervlan
+
+- Para enrutar con Intervlan en un router se deben usar subinterfaces en la interfaz principal de la LAN.
+
+- Se debe usar el mismo tipo de encapsulacion en la interfaz del switch y del router. 
+
+54 > ARP
+
+- En el trafico de envio de paquetes de A a B
+IP de origen y destino no cambian.
+
+MAC de origen y destino cambia por los saltos que realiza el paquete .
+
+- En el cache de ARP del host A tendra la IP y la MAC address del router A aprendido dinamicamente.
+
+55 > CSMA / CD
+
+- Una interfaz con CSMA/CD opera en half duplex por lo que ya es obsoleto en redes ethernet modernas con switches que operan en fullduplex.
+
+- Collision detection / carrier  sensing (CSMA/CD)
+
+
+
+56 > TCP /IP
+
+- La capa de internet del modo TCP/IP del DoD es el comparativo a la capa de red del modemo de referencia OSI de la ISO.
+
+57 > CLI
+
+- Con la siguiente linea de comando:
+
+sw(config-if)# switchport port-security
+sw(config-if)# switchport port-security mac-address sticky 
+
+podra grabar las mac-address conectados a esa interfaz en el archivo de running-config pasando a la lista de mac-address seguras. 
+
+
