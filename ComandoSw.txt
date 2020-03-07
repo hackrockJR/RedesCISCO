@@ -1,0 +1,7 @@
+>>>> CISCO <<<<
+
+* Switch
+
+show mac address-table dynamic  // Ver lista completa de MAC conectadas al Switch
+
+show mac address-table address 40a3.cc9a.7f95 //Buscar MAC en especifico en el Switch
